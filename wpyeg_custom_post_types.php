@@ -48,4 +48,5 @@ defined( 'ABSPATH' ) OR exit;
 
 
   require_once('post_types.php');
+  require_once('populate.php');
 ?>
