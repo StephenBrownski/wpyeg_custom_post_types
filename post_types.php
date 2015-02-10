@@ -20,22 +20,58 @@
 
     $args = array( 
       'labels' => $labels,
+      // Posts without hierarchy are ordered only by post date, and have no parent/child/sibling relationships.
       'hierarchical' => false,
+      // The description isn't used anywhere by default, but I have added a meta box the edit screens that contain the description.
       'description' => 'These are simple posts that behave like default posts.<br><br>They have categories and tags, and look just like a normal blog post.',
+      // Determines what built in features will appear on the edit screen.
       'supports' => array( 'title', 'editor', 'excerpt', 'thumbnail', 'revisions' ),
+      // Determines which taxonomies can be selected for this post type. Only the two default types are here, but you can add custom taxonomies as well.
       'taxonomies' => array( 'category', 'post_tag' ),
+
+      // Public covers a lot of different pieces, so here goes:
+      // Public doesn't really do anything on its own. Rather, it implies multiple other options if their values are not set.
       'public' => true,
-      'show_ui' => true,
-      'show_in_menu' => true,
-      
-      'menu_icon' => 'dashicons-admin-post',
-      'show_in_nav_menus' => false,
-      'publicly_queryable' => true,
+
+      // Options that affect readers:
+      // If set to false, this post type will be visible in wordpress search results. (Defaults to opposite of 'public')
       'exclude_from_search' => false,
+
+      // Can queries for this post type be performed from the front end?
+      /** Examples are: 
+       * ?post_type={post_type_key}
+       * ?{post_type_key}={single_post_slug}
+       * ?{post_type_query_var}={single_post_slug}
+       *
+       * Includes handling for url rewrites. (permalink structure)
+       */
+      // If this is set to false, you cannot view your post unless it is called directly from page template code.
+      'publicly_queryable' => true,
+
+      // Options that affect admin users
+      // If set to false, no UI will be generated for managing this post type in the admin panel.
+      'show_ui' => true,
+      // If set to false, posts of this type will not be selectable in wordpress menus.
+      'show_in_nav_menus' => false,
+      // If set to false, this will prevent the post type from showing in the admin side bar.
+      'show_in_menu' => true,
+      // End options implied by 'public'
+
+      // Enables post type archives. Available at '/{$post_type}' by default.
       'has_archive' => true,
+      // Allows you to change the query var for this post type. If set to true, the quoery var will default to the post type slug.
+      // Setting this to a string, will make the post types visible at '/{string}/{single_post_slug}', rather than '/{$post_type}/{single_post_slug}/'
+      // If set to false, the post type cannot be accessed at /?{query_var}={single_post_slug}
       'query_var' => true,
+
+      // The url to be used for the admin icon, or the name of the icon from Dashicons: https://developer.wordpress.org/resource/dashicons/
+      'menu_icon' => 'dashicons-admin-post',
+      // Allows this post type to be expoerted with the Wordpress Export/Import tool
       'can_export' => true,
+      // Allows url rewrites to be used for this post type. (Permalinks)
       'rewrite' => true,
+
+      // Capabilities are quite complicated, and could necessitate their own talk. The default of 'post' is good enough for just about anything.
       'capability_type' => 'post'
     );
 
