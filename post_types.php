@@ -19,15 +19,11 @@
     );
 
     $args = array( 
-      'labels' => $labels,
+      // Important arguments to go over:
       // Posts without hierarchy are ordered only by post date, and have no parent/child/sibling relationships.
       'hierarchical' => false,
-      // The description isn't used anywhere by default, but I have added a meta box the edit screens that contain the description.
-      'description' => 'These are simple posts that behave like default posts.<br><br>They have categories and tags, and look just like a normal blog post.',
       // Determines what built in features will appear on the edit screen.
       'supports' => array( 'title', 'editor', 'excerpt', 'thumbnail', 'revisions' ),
-      // Determines which taxonomies can be selected for this post type. Only the two default types are here, but you can add custom taxonomies as well.
-      'taxonomies' => array( 'category', 'post_tag' ),
 
       // Public covers a lot of different pieces, so here goes:
       // Public doesn't really do anything on its own. Rather, it implies multiple other options if their values are not set.
@@ -66,6 +62,15 @@
 
       // The url to be used for the admin icon, or the name of the icon from Dashicons: https://developer.wordpress.org/resource/dashicons/
       'menu_icon' => 'dashicons-admin-post',
+
+
+
+      'labels' => $labels,
+      // The description isn't used anywhere by default, but I have added a meta box the edit screens that contain the description.
+      'description' => 'These are simple posts that behave like default posts.<br><br>They have categories and tags, and look just like a normal blog post.',
+      // Determines which taxonomies can be selected for this post type. Only the two default types are here, but you can add custom taxonomies as well.
+      'taxonomies' => array( 'category', 'post_tag' ),
+
       // Allows this post type to be expoerted with the Wordpress Export/Import tool
       'can_export' => true,
       // Allows url rewrites to be used for this post type. (Permalinks)
@@ -146,6 +151,7 @@
       'labels' => $labels,
       'hierarchical' => true,
       'description' => 'These are hierarchal post types. They can have anscestors/parents, siblings, and children. They will behave similar to pages.',
+      // 'page-attributes' is required to display the parent, order, and page-template select meta-box.
       'supports' => array( 'title', 'editor', 'excerpt', 'thumbnail', 'revisions', 'page-attributes' ),
       'public' => true,
       'show_ui' => true,
