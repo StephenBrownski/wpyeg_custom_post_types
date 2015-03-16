@@ -20,6 +20,8 @@
 
     $args = array( 
       // Important arguments to go over:
+      'labels' => $labels,
+
       // Posts without hierarchy are ordered only by post date, and have no parent/child/sibling relationships.
       'hierarchical' => false,
       // Determines what built in features will appear on the edit screen.
@@ -55,27 +57,30 @@
 
       // Enables post type archives. Available at '/{$post_type}' by default.
       'has_archive' => true,
-      // Allows you to change the query var for this post type. If set to true, the quoery var will default to the post type slug.
-      // Setting this to a string, will make the post types visible at '/{string}/{single_post_slug}', rather than '/{$post_type}/{single_post_slug}/'
-      // If set to false, the post type cannot be accessed at /?{query_var}={single_post_slug}
-      'query_var' => true,
+
+      // Determines which taxonomies can be selected for this post type. Only the two default types are here, but you can add custom taxonomies as well.
+      'taxonomies' => array( 'category', 'post_tag' ),
+
+
+
+
+      // Less important, but still useful options
 
       // The url to be used for the admin icon, or the name of the icon from Dashicons: https://developer.wordpress.org/resource/dashicons/
       'menu_icon' => 'dashicons-admin-post',
 
-
-
-      'labels' => $labels,
+      // Allows you to change the query var for this post type. If set to true, the query var will default to the post type slug.
+      // Setting this to a string, will make the post types visible at '/{string}/{single_post_slug}', rather than '/{$post_type}/{single_post_slug}/'
+      // If set to false, the post type cannot be accessed at /?{query_var}={single_post_slug}
+      'query_var' => true,
       // The description isn't used anywhere by default, but I have added a meta box the edit screens that contain the description.
       'description' => 'These are simple posts that behave like default posts.<br><br>They have categories and tags, and look just like a normal blog post.',
-      // Determines which taxonomies can be selected for this post type. Only the two default types are here, but you can add custom taxonomies as well.
-      'taxonomies' => array( 'category', 'post_tag' ),
+
 
       // Allows this post type to be expoerted with the Wordpress Export/Import tool
       'can_export' => true,
       // Allows url rewrites to be used for this post type. (Permalinks)
       'rewrite' => true,
-
       // Capabilities are quite complicated, and could necessitate their own talk. The default of 'post' is good enough for just about anything.
       'capability_type' => 'post'
     );
